@@ -1,3 +1,4 @@
+
 #
 # Copyright (C) 2024 The Android Open Source Project
 # Copyright (C) 2024 SebaUbuntu's TWRP device tree generator
@@ -11,14 +12,19 @@ DEVICE_PATH := device/xiaomi/peridot
 ALLOW_MISSING_DEPENDENCIES := true
 
 # A/B
+ENABLE_VIRTUAL_AB := true
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
-    system_ext \
-    vendor \
+    boot \
+    dtbo \
     odm \
     system \
-    product
-BOARD_USES_RECOVERY_AS_BOOT := true
+    product \
+    system_ext \
+    vendor_boot \
+    vbmeta \
+    vbmeta_system \
+    vendor
 
 # Architecture
 TARGET_ARCH := arm64
@@ -27,6 +33,16 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 := 
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := kryo300
+
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
+TARGET_SUPPORTS_64_BIT_APPS := true
+TARGET_IS_64_BIT := true
+BOARD_VENDOR := xiaomi
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := peridot,peridotin
+
 
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
@@ -61,16 +77,28 @@ BOARD_SUPER_PARTITION_GROUPS := xiaomi_dynamic_partitions
 BOARD_XIAOMI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system system_ext product mi_ext vendor odm
 BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
 
+# Properties
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
 # Platform
 TARGET_BOARD_PLATFORM := pineapple
+PRODUCT_PLATFORM := pineapple
+TARGET_BOOTLOADER_BOARD_NAME := $(PRODUCT_PLATFORM)
+QCOM_BOARD_PLATFORMS += xiaomi_sm8635
+TARGET_BOARD_PLATFORM := $(QCOM_BOARD_PLATFORMS)
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno735
+TARGET_NO_BOOTLOADER := true
+TARGET_USES_UEFI := true
+BOARD_USES_QCOM_HARDWARE := true
+
+# frame rate
+TW_FRAMERATE := 120
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
-# Security patch level
-VENDOR_SECURITY_PATCH := 2021-08-01
+TARGET_COPY_OUT_VENDOR := vendor
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -81,6 +109,10 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
+# Resolution
+TARGET_SCREEN_HEIGHT := 2712
+TARGET_SCREEN_WIDTH := 1220
+
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
@@ -88,3 +120,25 @@ TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_DEFAULT_BRIGHTNESS := 750
+TW_MAX_BRIGHTNESS := 2047
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_DEFAULT_LANGUAGE := en
+TW_NO_SCREEN_BLANK := true
+TARGET_USES_MKE2FS := true
+TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_RESETPROP := true
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+TW_EXCLUDE_APEX := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+BOARD_USES_METADATA_PARTITION := true
+
+# Python
+TW_INCLUDE_PYTHON := true
