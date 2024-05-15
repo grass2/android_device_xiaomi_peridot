@@ -19,10 +19,10 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 
 PRODUCT_PACKAGES += \
-    bootctrl.pineapple
+    bootctrl.xiaomi_sm8635
 
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.pineapple \
+    bootctrl.xiaomi_sm8635 \
     libgptutils \
     libz \
     libcutils
