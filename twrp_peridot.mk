@@ -24,6 +24,6 @@ PRODUCT_MANUFACTURER := xiaomi
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="peridot-user 14 UKQ1.240116.001 V816.0.11.0.UNPCNXM release-keys"
+    PRIVATE_BUILD_DESC="twrp_peridot-user 14 UKQ1.240116.001 V816.0.11.0.UNPCNXM release-keys"
 
-BUILD_FINGERPRINT := Redmi/peridot/peridot:14/UKQ1.240116.001/V816.0.11.0.UNPCNXM:user/release-keys
+BUILD_FINGERPRINT := Redmi/twrp_peridot/peridot:14/UKQ1.240116.001/V816.0.11.0.UNPCNXM:user/release-keys
